@@ -1,5 +1,6 @@
 <?php
 
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,14 +19,25 @@ Route::get('/', function () {
 });
 
 //route basic
-Route::get('/about', function () {
-    return '<h1>Halo</h1>'
-        . 'Selamat datang di web saya<br>'
-        . 'Laravel, Emang keren';
+
+Route::get('/halaman2', function () {
+    return view('animals');
 });
 
-Route::get('/animals', function () {
-    $king = "Lion";
-    $hewan = ["monkey", "dragonfly", "tiger", "butterfly", "crocodile"];
-    return view('animals_page', compact('king', 'hewan'));
+Route::get('/halaman3', function () {
+    return view('fruits');
+});
+
+Route::get('/about', function () {
+    $nama = "Muhammad Hasby";
+    $jenis = "Laki-laki";
+    $pendidikan = "SMK";
+    $pekerjaan = "Direktur";
+    return view('Biodata', compact('nama','jenis','pendidikan','pekerjaan'));
+});
+
+//parameter
+Route::get('/sample/{nama}', function (Request $request, $nama) {
+    $nama2 = $nama;
+    return view('sample', compact('nama2'));
 });
